@@ -10,6 +10,7 @@ package cbre;
  * @author theje
  */
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 public class CBRE {
 
@@ -26,6 +27,11 @@ public class CBRE {
         File files = new File("/Users/ibadmomin/Desktop/TAMUHACK/CBRE/src/cbre/data.txt");
         Scanner scan = new Scanner(files);
 
+        ArrayList<Integer> prefTeamsList = new ArrayList<Integer>();
+        ArrayList<Integer> tolTeamsList = new ArrayList<Integer>();
+        ArrayList<Integer> noWayTeamsList = new ArrayList<Integer>();
+        ArrayList<ArrayList<Integer>> teamPref = new ArrayList<ArrayList<Integer>>();
+
         while (scan.hasNext()){
             String s = "";
             for (int i=0; i<5; i++){
@@ -33,7 +39,9 @@ public class CBRE {
             }
             Scanner lineScan = new Scanner(s);
             int team = lineScan.nextInt();
+            teams.add(team);
             int people = lineScan.nextInt();
+            strengths.add(people);
             lineScan.nextLine();
             String prefTeamString = lineScan.nextLine();
             prefTeamString = prefTeamString.replace(" ", "");
@@ -50,14 +58,19 @@ public class CBRE {
 
             //converts string of preferred teams to int
             for (int i=0; i<prefTeams.length; i++){
-                prefTeams[i] = Integer.parseInt(prefTeamArr[i]);
+                prefTeams[i] = (Integer.parseInt(prefTeamArr[i]));
             }
+            preferred.add(prefTeamsList);
+
             for (int i=0; i<tolTeams.length; i++){
-                tolTeams[i] = Integer.parseInt(tolTeamArr[i]);
+                tolTeams[i] = (Integer.parseInt(tolTeamArr[i]));
             }
+            tolerated.add(tolTeamsList);
+
             for (int i=0; i<noWayTeams.length; i++){
-                noWayTeams[i] = Integer.parseInt(noWayArr[i]);
+                noWayTeams[i] = (Integer.parseInt(noWayArr[i]));
             }
+
             System.out.println("team: "+ team);
             System.out.println("people: "+ people);
             System.out.println("preferred: "+ Arrays.toString(prefTeams));
@@ -65,12 +78,16 @@ public class CBRE {
             System.out.println("no way: "+ Arrays.toString(noWayTeams));
 
         }
+
+        rooms(teams, strengths, preferred);
     }
-    public String ROOMS(){
+    public String rooms(ArrayList<Integer> teams, ArrayList<Integer> strength, ArrayList<Integer> preferred){
     String floors[] = {"A","B","C","D","E"};
-    int floorSpace[] = {43,81,73,54,97};
-    int floorSpaceFilled[] = {0,0,0,0,0};
-    int teams[] = {22,45,34,51,11,37,42,16,29,56,49};
+    System.out.print(teams.get(0));
+//    int floorSpaces[] = new int[];
+//    int floorSpace[] = {43,81,73,54,97};
+//    int floorSpaceFilled[] = {0,0,0,0,0};
+//    int teams[] = {22,45,34,51,11,37,42,16,29,56,49};
     boolean teamsFilled[] = new boolean[11];
     int i=0;
     for( i = 0; i < teamsFilled.length; i++){
