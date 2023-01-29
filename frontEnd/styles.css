@@ -6,17 +6,42 @@ body{
   color: black;
   border-color: #F3EFCC;
 }
+
 .image-color:hover{
   background-color: #8d8d8d;
+}
+.onlyTeamsHome{
+  margin-bottom: 80px;
+  margin-top: 50px;
+}
+.mainInput{
+  padding: 10px 65px;
+  margin: 0;
+}
+.mainsubmit{
+  margin-bottom: 50px;
 }
 .teambutton{
   margin-top: 20px;
 }
 .teamsColor{
   background-color: #F3EFCC;
-  padding: 30px 30px;
+  padding: 20px 30px;
+
 }
 .teamInput{
+  margin-left: 13px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.onlyTeams{
+  color: #fff;
+  font-size: 70px;
+}
+.submitTeams{
+   margin-top: 12px;
+}
+.OnlyTeamsTeams{
+  transform: scale(.5,.5);
 }
