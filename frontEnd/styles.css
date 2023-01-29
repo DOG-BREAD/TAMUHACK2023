@@ -1,3 +1,11 @@
-#home{
-  color: #32502E;
+body{
+  background-color: #32502E;
+}
+.image-color{
+  background-color: #F3EFCC;
+  color: black;
+  border-color: #F3EFCC;
+}
+.image-color:hover{
+  background-color: #8d8d8d;
 }
