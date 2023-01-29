@@ -12,3 +12,11 @@ body{
 .teambutton{
   margin-top: 20px;
 }
+.teamsColor{
+  background-color: #F3EFCC;
+  padding: 30px 30px;
+}
+.teamInput{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
