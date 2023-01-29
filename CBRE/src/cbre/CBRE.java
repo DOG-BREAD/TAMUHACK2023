@@ -7,93 +7,72 @@ package cbre;
 
 /**
  *
- * @author theje
+ * @author samuel jacobs
  */
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
+
 public class CBRE {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<Integer> teams = new ArrayList<Integer>();
-        ArrayList<Integer> strengths = new ArrayList<Integer>();
-        ArrayList<ArrayList<Integer>>  preferred = new ArrayList<ArrayList<Integer>>();
-        ArrayList<ArrayList<Integer>>  tolerated = new ArrayList<ArrayList<Integer>>();
-        ArrayList<ArrayList<Integer>>  noWay = new ArrayList<ArrayList<Integer>>();
+   
+    public static void main(String[] args) {
+        // TODO code application logic here
+        CBRE main = new CBRE();
+        main.ROOMS();
+    }
 
-        File files = new File("/Users/ibadmomin/Desktop/TAMUHACK/CBRE/src/cbre/data.txt");
-        Scanner scan = new Scanner(files);
-
-        ArrayList<Integer> prefTeamsList = new ArrayList<Integer>();
-        ArrayList<Integer> tolTeamsList = new ArrayList<Integer>();
-        ArrayList<Integer> noWayTeamsList = new ArrayList<Integer>();
-        ArrayList<ArrayList<Integer>> teamPref = new ArrayList<ArrayList<Integer>>();
-
-        while (scan.hasNext()){
-            String s = "";
-            for (int i=0; i<5; i++){
-                s += scan.nextLine() + "\n";
-            }
-            Scanner lineScan = new Scanner(s);
-            int team = lineScan.nextInt();
-            teams.add(team);
-            int people = lineScan.nextInt();
-            strengths.add(people);
-            lineScan.nextLine();
-            String prefTeamString = lineScan.nextLine();
-            prefTeamString = prefTeamString.replace(" ", "");
-            String[] prefTeamArr = prefTeamString.split(",");
-            int[] prefTeams = new int[prefTeamArr.length];
-            String tolTeamString = lineScan.nextLine();
-            tolTeamString = tolTeamString.replace(" ", "");
-            String[] tolTeamArr = tolTeamString.split(",");
-            int[] tolTeams = new int[tolTeamArr.length];
-            String noWayString = lineScan.nextLine();
-            noWayString = noWayString.replace(" ", "");
-            String[] noWayArr = noWayString.split(",");
-            int[] noWayTeams = new int[noWayArr.length];
-
-            //converts string of preferred teams to int
-            for (int i=0; i<prefTeams.length; i++){
-                prefTeams[i] = (Integer.parseInt(prefTeamArr[i]));
-            }
-            preferred.add(prefTeamsList);
-
-            for (int i=0; i<tolTeams.length; i++){
-                tolTeams[i] = (Integer.parseInt(tolTeamArr[i]));
-            }
-            tolerated.add(tolTeamsList);
-
-            for (int i=0; i<noWayTeams.length; i++){
-                noWayTeams[i] = (Integer.parseInt(noWayArr[i]));
-            }
-
-            System.out.println("team: "+ team);
-            System.out.println("people: "+ people);
-            System.out.println("preferred: "+ Arrays.toString(prefTeams));
-            System.out.println("tolerated: "+ Arrays.toString(tolTeams));
-            System.out.println("no way: "+ Arrays.toString(noWayTeams));
-
+    public void ROOMS() {
+        String floors[] = {"A", "B", "C", "D", "E"};
+        int floorSpace[] = {43, 81, 73, 54, 97};
+        int floorSpaceFilled[] = {0, 0, 0, 0, 0};
+        int teams[] = {22, 45, 34, 51, 11, 37, 42, 16, 29, 56, 49};
+        int maxTeams = 0;
+        boolean teamsFilled[] = new boolean[11];
+        boolean teamCheck = true;
+        String floorPlan[] = {"team", "team", "team", "team", "team"};
+        for (int i = 0; i < teamsFilled.length; i++) {
+            teamsFilled[i] = false;
         }
+    
+       
+        int loopCount=  0;
+        while (teamCheck) {
+            loopCount +=1;
+            for (int i = 0; i < floors.length; i++) {
+                for (int j = 0; j < teams.length; j++) {
+                    if ((floorSpaceFilled[i] < floorSpace[i]) && (teams[j] + floorSpaceFilled[i] < floorSpace[i]) && (teamsFilled[j] == false)) {
+                        floorPlan[i] += " " + teams[j];
+                        teamsFilled[j] = true;
+                        maxTeams+=1;
+                        floorSpaceFilled[i] += teams[j];
 
-        rooms(teams, strengths, preferred);
+                    }
+                }
+            }
+            teamCheck =false;
+             for(int i = 0; i < teams.length; i++){
+                if(teamsFilled[i] == false){
+                    teamCheck = true;
+                }
+            }
+             
+            if(loopCount > teams.length){
+                break;
+            }
+            for(int i =0; i < floors.length; i++){
+                if(!((floorSpaceFilled[i] / floorSpace[i] *1.00) < .75)){
+                    System.out.print("bad");
+                    
+                    
+                }
+            }
+        }
+        for(int i = 0; i < floorPlan.length; i++){
+            System.out.println(floorPlan[i]);
+            
+        }
+        System.out.println("Max Teams Used " + maxTeams);
+        //}
+        return;
     }
-    public String rooms(ArrayList<Integer> teams, ArrayList<Integer> strength, ArrayList<Integer> preferred){
-    String floors[] = {"A","B","C","D","E"};
-    System.out.print(teams.get(0));
-//    int floorSpaces[] = new int[];
-//    int floorSpace[] = {43,81,73,54,97};
-//    int floorSpaceFilled[] = {0,0,0,0,0};
-//    int teams[] = {22,45,34,51,11,37,42,16,29,56,49};
-    boolean teamsFilled[] = new boolean[11];
-    int i=0;
-    for( i = 0; i < teamsFilled.length; i++){
-        teamsFilled[i] = false;
-    }
-    return "";
 }
-}
-
