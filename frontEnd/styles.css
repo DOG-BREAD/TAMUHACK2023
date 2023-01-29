@@ -45,3 +45,9 @@ body{
 .OnlyTeamsTeams{
   transform: scale(.5,.5);
 }
+
+.layout-Container{
+  background-color: #F3EFCC;
+  border-color: black;
+  border-width: medium;
+}
